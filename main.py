@@ -1,13 +1,13 @@
 #!/usr/local/bin/python
 # -*- coding:UTF-8 -*-
-import subprocess
 import os
 import sys
 import logging
-import argparse
 import re
 import datetime
 import ConfigParser
+import subprocess
+import argparse
 
 # create logger with '__TMP_TOOL_NAME'
 logger = logging.getLogger('__TMP_TOOL_NAME')
