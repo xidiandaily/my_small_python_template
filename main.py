@@ -8,6 +8,8 @@ import datetime
 import ConfigParser
 import subprocess
 import argparse
+import pdb
+#__MYIMPORT
 
 # create logger with '__TMP_TOOL_NAME'
 logger = logging.getLogger('__TMP_TOOL_NAME')
@@ -30,6 +32,7 @@ logger.addHandler(logfile)
 
 parser=argparse.ArgumentParser(description="tool description",version="version 1.0,release by lawrencechi(at)tencent.com")
 parser.add_argument('-l',dest="enable_debug_log",action='store_true',help='enable debug log')
+parser.add_argument('-q',dest="enable_scilence_log",action='store_true',help='if this argument has been set,stop output any log to stdout')
 # parser.add_argument('-a','--a1',dest='test',action='store',help='store ')
 # parser.add_argument('-b',const='if_argument_is_set_set_this_value',action='store_const',help='store_const')
 # parser.add_argument('-c',action='store_true',help='store_true')
@@ -41,17 +44,15 @@ args=parser.parse_args()
 logger.debug(args)
 parser.print_help()
 
+if args.enable_scilence_log:
+    logger.removeHandler(ch)
+
 if args.enable_debug_log:
     logger.setLevel(logging.DEBUG)
     ch.setLevel(logging.DEBUG)
     logfile.setLevel(logging.DEBUG)
     logger.debug("if enable_debug_log, you will see this log")
 
-# # read config
-# config=ConfigParser.ConfigParser()
-# config.read("config.ini")
-# svn_username=config.get("svn","username")
-# svn_passwd=config.get("svn","passwd")
-# logger.debug("username:{}".format(svn_username))
-# logger.debug("passwd:{}".format(svn_passwd))
+
+#__MYEXAMPLE
 
