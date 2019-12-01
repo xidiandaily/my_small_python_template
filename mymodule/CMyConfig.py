@@ -19,6 +19,9 @@ config.ini:
     passwd=passwd
 """
 import ConfigParser
+import logging
+
+logger = logging.getLogger('__TMP_TOOL_NAME')
 
 __all__ = [
         "CMyConfig",

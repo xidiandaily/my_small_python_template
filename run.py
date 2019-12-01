@@ -119,7 +119,16 @@ if not args.toolname:
 
 enablemodules=[]
 if args.modules:
-    for name in args.modules.split(','):
+    names=args.modules.split(',')
+    newnames=[]
+    # if has config,generate it first
+    if 'CMyConfig' in names:
+        newnames.append('CMyConfig')
+
+    for name in names:
+        if 'CMyConfig' != name:
+            newnames.append(name)
+    for name in newnames:
         module = get_module_by_name(name)
         if isinstance(module,CMyModule):
             enablemodules.append(module)
@@ -164,7 +173,16 @@ sys.path.append("./mymodule")
             mymoduledir=os.path.join(outputdir,"mymodule")
             if not os.path.exists(mymoduledir):
                 os.mkdir(mymoduledir)
-            shutil.copy(filename,mymoduledir)
+
+            strModule=''
+            with open(filename,'r') as fileObj:
+                strModule=fileObj.read()
+                fileObj.close()
+
+            strModule=strModule.replace('__TMP_TOOL_NAME',args.toolname)
+            with open(os.path.join(mymoduledir,os.path.basename(filename)),'w') as fileObj:
+                fileObj.write(strModule)
+                fileObj.close()
         print("copy module:{} success".format(module._modulename))
 
 strContent=''
