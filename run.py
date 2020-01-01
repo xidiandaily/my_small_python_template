@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/bin/python
 # -*- coding:UTF-8 -*-
 import subprocess
 import os
@@ -10,6 +10,7 @@ import datetime
 import ConfigParser
 import fileinput
 import shutil
+import pdb
 
 class CMyModule:
     def __init__(self):
@@ -20,6 +21,15 @@ class CMyModule:
 
     def __str__(self):
         return "\nmodulename:{}\nexample:\n{}".format(self._modulename,self._example)
+
+def run_cmds(cmds,cwd=os.getcwd(),ignored=False):
+    try:
+        output=subprocess.check_call(cmds,cwd=cwd)
+        logger.debug("run cmds success! cmds:{} cwd:{} ignored={}".format(cmds,cwd,ignored))
+    except subprocess.CalledProcessError as e:
+        logger.error("run cmds failed!  cmds:{} cwd:{} ignored={}".format(cmds,cwd,ignored))
+        if ignored:
+            pass
 
 def get_module_by_name(_modulename):
     filename=os.path.join("mymodule","{}.py".format(name))
@@ -202,6 +212,10 @@ with open(toolscriptname,'w') as fileObj:
             break
         fileObj.write(line+"\n")
     fileObj.close()
+
+    if sys.platform == 'darwin':
+        run_cmds(["chmod","+x",toolscriptname])
+
     print("{} is generate success ".format(toolscriptname))
 
 # write ini config
