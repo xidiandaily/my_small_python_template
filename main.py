@@ -37,11 +37,11 @@ parser.print_help()
 
 # create logger with '__TMP_TOOL_NAME'
 logger = logging.getLogger('__TMP_TOOL_NAME')
-logger.setLevel(logging.ERROR)
+logger.setLevel(logging.INFO)
 # create file handler which logs even debug messages
 # create console handler with a higher log level
 ch = logging.StreamHandler()
-ch.setLevel(logging.ERROR)
+ch.setLevel(logging.INFO)
 
 # create formatter and add it to the handlers
 formatter = logging.Formatter('%(message)s')
@@ -53,7 +53,7 @@ logger.addHandler(ch)
 if args.enable_log_file or args.enable_debug_log:
     formatter = logging.Formatter('%(asctime)s - %(funcName)s:%(lineno)d - %(levelname)s - %(message)s')
     logfile=logging.FileHandler(logfilename)
-    logfile.setLevel(logging.ERROR)
+    logfile.setLevel(logging.INFO)
     logfile.setFormatter(formatter)
     logger.addHandler(logfile)
 
