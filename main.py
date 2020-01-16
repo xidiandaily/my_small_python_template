@@ -37,31 +37,22 @@ parser.print_help()
 
 # create logger with '__TMP_TOOL_NAME'
 logger = logging.getLogger('__TMP_TOOL_NAME')
+simpleformatter = logging.Formatter('%(message)s')
+detailformatter = logging.Formatter('%(asctime)s - %(funcName)s:%(lineno)d - %(levelname)s - %(message)s')
 logger.setLevel(logging.INFO)
-# create file handler which logs even debug messages
-# create console handler with a higher log level
-ch = logging.StreamHandler()
-ch.setLevel(logging.INFO)
-
-# create formatter and add it to the handlers
-formatter = logging.Formatter('%(message)s')
-ch.setFormatter(formatter)
-# add the handlers to the logger
-logger.addHandler(ch)
+# create console handler with stdout output
+stdout = logging.StreamHandler(stream=sys.stdout)
+logger.addHandler(stdout)
 
 #log file
 if args.enable_log_file or args.enable_debug_log:
-    formatter = logging.Formatter('%(asctime)s - %(funcName)s:%(lineno)d - %(levelname)s - %(message)s')
     logfile=logging.FileHandler(logfilename)
-    logfile.setLevel(logging.INFO)
-    logfile.setFormatter(formatter)
+    logfile.setFormatter(detailformatter)
     logger.addHandler(logfile)
 
 if args.enable_debug_log:
     logger.setLevel(logging.DEBUG)
-    ch.setLevel(logging.DEBUG)
-    ch.setFormatter(formatter)
-    logfile.setLevel(logging.DEBUG)
+    stdout.setFormatter(detailformatter)
     logger.debug("if enable_debug_log, you will see this log")
 
 logger.debug("helloworld")
