@@ -9,6 +9,7 @@ import ConfigParser
 import subprocess
 import argparse
 import pdb
+import codecs
 #__MYIMPORT
 
 def run_cmds(cmds,cwd=os.getcwd(),ignored=False):
@@ -19,6 +20,18 @@ def run_cmds(cmds,cwd=os.getcwd(),ignored=False):
         logger.error("run cmds failed!  cmds:{} cwd:{} ignored={}".format(cmds,cwd,ignored))
         if ignored:
             pass
+
+def write_file(strName,strCon):
+    with codecs.open(strName,'wc','utf-8') as fileObj:
+        fileObj.write(strCon)
+        fileObj.close()
+
+def read_file(strFileName):
+    strCon=''
+    with open(strFileName,'r') as fileObj:
+        strCon=fileObj.read()
+        fileObj.close()
+    return strCon
 
 logfilename=os.path.splitext(sys.argv[0])[0]+".log"
 
