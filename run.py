@@ -30,6 +30,7 @@ def run_cmds(cmds,cwd=os.getcwd(),ignored=False):
         logger.error("run cmds failed!  cmds:{} cwd:{} ignored={}".format(cmds,cwd,ignored))
         if ignored:
             pass
+        raise
 
 def get_module_by_name(_modulename):
     filename=os.path.join("mymodule","{}.py".format(name))
