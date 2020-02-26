@@ -131,10 +131,10 @@ class CMySvn:
         items=[]
         for logentry in root.findall('logentry'):
             logitem = {}
-            logitem['ver']       = int(logentry.get('revision'))
-            logitem['author']    = logentry.find('author').text
-            logitem['date']      = logentry.find('date').text
-            logitem['msg']       = logentry.find('msg').text
+            logitem['revision'] = int(logentry.get('revision'))
+            logitem['author']   = logentry.find('author').text
+            logitem['date']     = logentry.find('date').text
+            logitem['msg']      = logentry.find('msg').text
             if not logitem['msg']:
                 logitem['msg']   = ''
 

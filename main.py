@@ -30,6 +30,7 @@ def read_file(strFileName):
     strCon=''
     with open(strFileName,'r') as fileObj:
         strCon=fileObj.read()
+        strCon=strCon.decode('utf-8')
         fileObj.close()
     return strCon
 
