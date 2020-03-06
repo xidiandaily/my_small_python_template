@@ -55,7 +55,6 @@ class CMySvn:
         if xmloutput:
             cmds.append('--xml')
 
-        logger.debug("run cmds success! cmds:{} cwd:{}".format(cmds,cwd))
         output=''
         try:
             output=subprocess.check_output(cmds,cwd=cwd,stderr=subprocess.STDOUT)
