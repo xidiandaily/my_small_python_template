@@ -20,6 +20,7 @@ def run_cmds(cmds,cwd=os.getcwd(),ignored=False):
         logger.error("run cmds failed!  cmds:{} cwd:{} ignored={}".format(cmds,cwd,ignored))
         if ignored:
             pass
+        raise
 
 def write_file(strName,strCon):
     with codecs.open(strName,'wc','utf-8') as fileObj:
